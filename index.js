@@ -19,16 +19,7 @@ http.createServer(
                 break;
         }
     }).listen(process.env.PORT || 3000);
-/*
-var myObj, x;
-myObj = {
-    "name":"25",
-    "age":25,
-    "girls":[ "Muna", "Salma", "Fadumo" ]
-};
-x = myObj.girls[0];
 
- */
 
 
 
