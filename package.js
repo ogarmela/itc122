@@ -3,5 +3,5 @@
 "discription": "data students in modules array",
 "main":"index.js",
 "repository":"github",
-"github":"https://github.com/sebastianquintana/ITC-122"
+"https://github.com/ogarmela/ITC122_JSON_1/tree/master"
 }
