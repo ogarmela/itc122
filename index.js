@@ -1,6 +1,7 @@
-// this is sample file
+/*creating variable to get modules from data.js*/
+
 const http = require("http");
-const students = require("http");
+const students = require("./data");
 
 
 /*creating a var to get all the data from students*/
@@ -15,6 +16,7 @@ http.createServer(
                 res.writeHead(200, {'Content-Type': 'text/plain'});
                 res.end('Home page\n' + 'arraylenght:'+ showstudents.length);
                 break;
+                
             case '/about':
                 res.writeHead(200, {'Content-Type': 'text/plain'});
                 res.end('About page \n This is Omar Garmela, \n I\'am doing my programming degree.I probably, i will finish the following winter');
