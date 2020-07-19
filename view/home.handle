@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" /> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>courses</title>
+    <link rel="stylesheet" type="text/css" href="./css/styles.css" />
+  </head>
+  <body>
+   <h1>Welcome to course!</h1> 
+   <h2>Click on a studens to learn more:</h2>
+   
+    <ul>
+        {{#each students}}
+            <li><a href= "/detail?author={{auth}}">{{auth}}</a></li>
+        {{/each}}
+    </ul>
+  </body>
+</html>
