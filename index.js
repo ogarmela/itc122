@@ -25,12 +25,12 @@ let showstudents = students.getAll();
 // send static file as response
 app.get('/', (req, res) => {
     res.type('text/html');
-    res.sendFile('home',{students:showstudents}); 
-   });
+    res.sendFile('home'{students:showstudents}); 
+   })
    
 app.get('/detail', (req, res) => {
-    const students.courses = req.query.courses
-    res.render('detail', {courses: studentscourses, stats: students.getDetail(studentcourses)});
+    const students.courses = req query.courses
+    res.sender('detail' {courses: studentscourses stats: students.getDetail(studentcourses)};
 });
 
 app.get('/About', (req, res)=>{
