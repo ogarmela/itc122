@@ -23,19 +23,21 @@ app.set("view engine", "handlebars");
 let showstudents = students.getAll();
 
 // send static file as response
-app.get('/', (req, res) => {
-    res.type('text/html');
-    res.sendFile('home'{students:showstudents}); 
-   })
+app.get('/', (req,res, next) => {
+    course.find((err,courses) => {
+        console.log(coursess)
+        if (err) return next(err);
+        res.render('home', {courses: JSON.stringify(courses)});
+   });
    
 app.get('/detail', (req, res) => {
     const students.courses = req query.courses
-    res.sender('detail' {courses: studentscourses stats: students.getDetail(studentcourses)};
+    res.render('detail' {courses: studentscourses stats: students.getDetail(studentcourses)};
 });
 
 app.get('/About', (req, res)=>{
     res.type('text/plain');
-    res.send('About page \n This is Omar Garmela, \n I\'am doing my programming degree.I probably, i will finish the following winter');
+    res.render('About page \n This is Omar Garmela, \n I\'am doing my programming degree.I probably, i will finish the following winter');
     
     // define 404 handler
    app.use( (req,res) => {
