@@ -30,10 +30,20 @@ app.get('/', (req,res, next) => {
         res.render('home', {courses: JSON.stringify(courses)});
    });
    
-app.get('/detail', (req, res) => {
-    const students.courses = req query.courses
-    res.render('detail' {courses: studentscourses stats: students.getDetail(studentcourses)};
-});
+app.get('/delete', (req, res) => {
+    const coursesno = req.query.no;
+    courses.findByIDAndDelete({title: courses}, (err, courses) => {
+        
+        if (err) {
+            console.log(err);
+        } else if (!course) {
+            console.log(courses + "course not found");
+            res.send(`${courseno} not found`);
+        } else if (movie) {
+            console.log(courseno + "Removed");
+            res.send(`${coursesno} Removed`);
+        }
+    });
 
 app.get('/About', (req, res)=>{
     res.type('text/plain');
