@@ -1,6 +1,6 @@
 "use strict"
 
-let book = require("../lib/book.js");
+let book = require("../lib/course.js");
 
 const express = require("express");
 const app = express();
@@ -43,7 +43,7 @@ app.get('/detail', function(req,res){
 app.post('/detail', function(req,res){
     console.log(req.body)
     var found = course.get(req.body.no);
-    res.render("details", {no: req.body.no, result: found, courses: courses.getAll()});
+    res.render("details", {no: req.body.no, result: found, courses: course.getAll()});
 });
 
 // define 404 handler
