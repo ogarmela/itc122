@@ -1,6 +1,6 @@
 "use strict"
 
-let book = require("../lib/course.js");
+let course = require("../lib/course.js");
 
 const express = require("express");
 const app = express();
