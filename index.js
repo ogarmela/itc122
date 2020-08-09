@@ -20,7 +20,7 @@ app.get('/', (req,res) => {
 // send plain text response
 app.get('/about', function(req,res){
     res.type('text/plain');
-    res.send('About page');
+    res.send(''About page \n This is Omar Garmela, \n I\'am doing my programming degree.I probably, i will finish the following winter');
 });
 
 // handle GET 
