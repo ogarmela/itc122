@@ -1,6 +1,6 @@
 "use strict"
 
-let course = require("./data");
+let class = require("./data");
 
 const express = require("express");
 const app = express();
