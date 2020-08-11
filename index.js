@@ -25,7 +25,7 @@ app.get('/about', function(req,res){
 
 // handle GET 
 app.get('/delete', function(req,res){
-    let result = course.delete(req.query.no); // delete course object
+    let result = class.delete(req.query.no); // delete course object
     res.render('delete', {no: req.query.no, result: result});
 });
 
@@ -43,7 +43,7 @@ app.get('/detail', function(req,res){
 app.post('/detail', function(req,res){
     console.log(req.body)
     var found = class.get(req.body.no);
-    res.render("details", {no: req.body.no, result: found, courses: class.getAll()});
+    res.render("details", {no: req.body.no, result: found, claases: class.getAll()});
 });
 
 // define 404 handler
