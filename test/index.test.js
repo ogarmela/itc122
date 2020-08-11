@@ -6,13 +6,13 @@ describe("class", () => {
   /**
    * Get Test
    */
-  it("returns requested book", () => {
+  it("returns requested class", () => {
     const result = class.get("classNO", "google");
     expect(result).to.deep.equal({classNo: "Google", classNO:"Robot #4"});
   });
   
   it("fails w/ invalid class", () => {
-    const result = class.get("title", "fake");
+    const result = class.get("classNo", "fake");
     expect(result).to.be.undefined;
   });
 
