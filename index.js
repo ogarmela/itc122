@@ -14,7 +14,7 @@ app.engine('hbs', exphbs({defaultLayout: false}));
 app.set("view engine", "hbs");
 
 app.get('/', (req,res) => {
-    res.render('home', {courses: course.getAll()}); 
+    res.render('home', {classes: class.getAll()}); 
 });
 
 // send plain text response
@@ -31,7 +31,7 @@ app.get('/delete', function(req,res){
 
 app.get('/detail', function(req,res){
     console.log(req.query)
-    var found = course.get(req.query.no);
+    var found = class.get(req.query.no);
     res.render("details", {
         no: req.query.no, 
         result: found
@@ -42,8 +42,8 @@ app.get('/detail', function(req,res){
 // handle POST
 app.post('/detail', function(req,res){
     console.log(req.body)
-    var found = course.get(req.body.no);
-    res.render("details", {no: req.body.no, result: found, courses: course.getAll()});
+    var found = class.get(req.body.no);
+    res.render("details", {no: req.body.no, result: found, courses: class.getAll()});
 });
 
 // define 404 handler
