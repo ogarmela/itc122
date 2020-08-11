@@ -2,7 +2,7 @@ const expect = require("chai").expect;
 const course = require("../data");
 const query = require('querystring');
 
-describe("course", () => {
+describe("class", () => {
   /**
    * Get Test
    */
