@@ -17,7 +17,7 @@ exports.getAll = () => {
 }
 
 exports.getDetail = courses => {
-    const students = students.find(students => students.courses === courses);
+    const students = students.find(students => students.classes === classes);
     return students;
 }
 
