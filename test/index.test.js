@@ -7,37 +7,37 @@ describe("course", () => {
    * Get Test
    */
   it("returns requested book", () => {
-    const result = course.get("title", "google");
-    expect(result).to.deep.equal({title: "Google", author:"Robot #4", price:15});
+    const result = class.get("classNO", "google");
+    expect(result).to.deep.equal({classNo: "Google", classNO:"Robot #4"});
   });
   
-  it("fails w/ invalid book", () => {
-    const result = course.get("title", "fake");
+  it("fails w/ invalid class", () => {
+    const result = class.get("title", "fake");
     expect(result).to.be.undefined;
   });
 
     /**
    * Add Test
    */
-  it("adds requested course", () => {
+  it("adds requested class", () => {
     // get old length
-    const oldLength = course.getAll().length;
+    const oldLength = class.getAll().length;
 
-    const url = "title=test&author=dai&price=20";
+    const url = "class=test&classNo=4";
     const jsonObject = query.parse(url);
-    Object.setPrototypeOf(jsonObject, book);
+    Object.setPrototypeOf(jsonObject, class);
 
-    const result = course.add(jsonObject);
+    const result = class.add(jsonObject);
     expect(result).to.deep.equal({added: true, total: oldLength+1});
   });
   
   it("fails w/ has been added", () => {
     // get old length
-    const oldLength = course.getAll().length;
+    const oldLength = class.getAll().length;
 
-    const url = "title=test&author=dai&price=20";
+    const url = "class=test&classNo=4";
     const jsonObject = query.parse(url);
-    Object.setPrototypeOf(jsonObject, course);
+    Object.setPrototypeOf(jsonObject, class);
 
     const result = book.add(jsonObject);
     expect(result).to.deep.equal({added: false, total: oldLength});
@@ -46,13 +46,13 @@ describe("course", () => {
     /**
    * Delete Test
    */
-  it("delete requested book", () => {
-    const result = book.delete("title", "google");
-    expect(result).to.deep.equal(book.getAll());
+  it("delete requested class", () => {
+    const result = class.delete("classNo", "google");
+    expect(result).to.deep.equal(class.getAll());
   });
   
-  it("fails w/ not found to delete book", () => {
-    const result = book.delete("title", "fake");
+  it("fails w/ not found to delete class", () => {
+    const result = class.delete("classNo", "fake");
     expect(result).to.be.equal(-1);
   });
  });
