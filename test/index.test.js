@@ -5,7 +5,7 @@ const book = require("./class");
 describe("class", function() {
     
     it("returns requested class", function() {
-        let result = class.get("dune");
+        let result = class.get("omar");
         expect(result).to.deep.equal({class: "omar", omar:"omar"});
     });
     
