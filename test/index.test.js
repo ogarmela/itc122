@@ -1,58 +1,35 @@
+'use strict'
 const expect = require("chai").expect;
-const course = require("../data");
-const query = require('querystring');
+const book = require("../lib/book");
 
-describe("class", () => {
-  /**
-   * Get Test
-   */
-  it("returns requested class", () => {
-    const result = class.get("classNO", "google");
-    expect(result).to.deep.equal({classNo: "Google", classNO:"Robot #4"});
-  });
-  
-  it("fails w/ invalid class", () => {
-    const result = class.get("classNo", "fake");
-    expect(result).to.be.undefined;
-  });
+describe("Book", function() {
+    
+    it("returns requested book", function() {
+        let result = book.get("dune");
+        expect(result).to.deep.equal({title: "dune", author:"frank herbert", pubdate:1969});
+    });
+    
+    it("fails to return an w/ invalid book", function() {
+        let result = book.get("fake");
+        expect(result).to.be.undefined;
+    });
 
-    /**
-   * Add Test
-   */
-  it("adds requested class", () => {
-    // get old length
-    const oldLength = class.getAll().length;
+    it("adds a new book", function() {
+        let result = book.add({title: "dune emperor", author:"frank herbert", pubdate:1969});
+        expect(result.added).to.be.true;
+    });
+    it("fails to add an existing book", function() {
+        let result = book.add({title: "dune", author:"frank herbert", pubdate:1969});
+        expect(result.added).to.be.false;
+    });
 
-    const url = "class=test&classNo=4";
-    const jsonObject = query.parse(url);
-    Object.setPrototypeOf(jsonObject, class);
+    it("deletes an existing book", function() {
+        let result = book.delete("dune");
+        expect(result.deleted).to.be.true;
+    });
+    it("fails to delete an invalid book", function() {
+        let result = book.delete("travels with charlie");
+        expect(result.deleted).to.be.false;
+    });
 
-    const result = class.add(jsonObject);
-    expect(result).to.deep.equal({added: true, total: oldLength+1});
-  });
-  
-  it("fails w/ has been added", () => {
-    // get old length
-    const oldLength = class.getAll().length;
-
-    const url = "class=test&classNo=4";
-    const jsonObject = query.parse(url);
-    Object.setPrototypeOf(jsonObject, class);
-
-    const result = book.add(jsonObject);
-    expect(result).to.deep.equal({added: false, total: oldLength});
-  });
-
-    /**
-   * Delete Test
-   */
-  it("delete requested class", () => {
-    const result = class.delete("classNo", "google");
-    expect(result).to.deep.equal(class.getAll());
-  });
-  
-  it("fails w/ not found to delete class", () => {
-    const result = class.delete("classNo", "fake");
-    expect(result).to.be.equal(-1);
-  });
- });
+});
