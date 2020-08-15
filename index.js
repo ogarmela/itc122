@@ -1,9 +1,10 @@
 "use strict"
 
-let class = require("./data");
 
 const express = require("express");
 const app = express();
+
+const class = require("./data");
 
 app.set("port", process.env.PORT || 3000);
 app.use(express.static(__dirname + '/public')); // allows direct navigation to static files
