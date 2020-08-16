@@ -27,7 +27,7 @@ describe("class", function() {
         let result = class.delete("season");
         expect(result.deleted).to.be.true;
     });
-    it("fails to delete an invalid book", function() {
+    it("fails to delete an invalid class", function() {
         let result = class.delete("omar");
         expect(result.deleted).to.be.false;
     });
