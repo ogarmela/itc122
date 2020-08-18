@@ -86,7 +86,7 @@ app.get('/api/v1/delete/:classno', (req,res, next) => {
 
 app.get('/api/v1/add/:classno/:omar/:omar', (req,res, next) => {
     // find & update existing item, or add new 
-    let title = req.params.classno;
+    let classno = req.params.classno;
     class.update({ classno: classno},  {upsert: true }, (err, result) => {
         if (err) return next(err);
         // nModified = 0 for new item, = 1+ for updated item 
