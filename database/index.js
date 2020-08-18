@@ -15,13 +15,13 @@ app.use((err, req, res, next) => {
 
 // set template engine
 let handlebars =  require("express-handlebars");
-app.engine(".html", handlebars({extname: '.html', defaultLayout: 'main' }));
+app.engine(".main", handlebars({extname: '.main', defaultLayout: 'main' }));
 app.set(" engine", "data");
 
 
 app.get('/', (req,res) => {
     class.find({}).lean()
-        .then((books) => {
+        .then((class) => {
             res.render('home', { class });
         })
         .catch(err => next(err));
@@ -41,7 +41,7 @@ app.get('/detail', (req,res,next) => {
 });
 
 app.post('/get', (req,res, next) => {
-    class.findOne({ title:req.body.title }).lean()
+    class.findOne({ classno:req.body.classno }).lean()
         .then((class) => {
             res.render('details', {result: class} );
         })
