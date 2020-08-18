@@ -1,12 +1,12 @@
 var express = require("express");
 var app = express();
-var Book = require("../models/book"); // use database model
+var class = require("./models/class"); // use database model
 
-var book = require("./book");
+var class = require("./class");
 
 // configure Express app
 app.set('port', process.env.PORT || 3000);
-app.use(express.static(__dirname + '/../public'));
+app.use(express.static(__dirname + '/./public'));
 app.use(require("body-parser").urlencoded({extended: true}));
 app.use('/api', require("cors")());
 app.use((err, req, res, next) => {
@@ -16,78 +16,78 @@ app.use((err, req, res, next) => {
 // set template engine
 let handlebars =  require("express-handlebars");
 app.engine(".html", handlebars({extname: '.html', defaultLayout: 'main' }));
-app.set("view engine", ".html");
+app.set(" engine", "data");
 
 
 app.get('/', (req,res) => {
-    Book.find({}).lean()
+    class.find({}).lean()
         .then((books) => {
-            res.render('home', { books });
+            res.render('home', { class });
         })
         .catch(err => next(err));
 });
 
 app.get('/about', (req,res) => {
-    res.type('text/html');
+    res.type('text/data');
     res.render('about');
 });
 
 app.get('/detail', (req,res,next) => {
-    Book.findOne({ title:req.query.title }).lean()
+    class.findOne({ classno:req.query.classno }).lean()
         .then((book) => {
-            res.render('details', {result: book} );
+            res.render('details', {result: class} );
         })
         .catch(err => next(err));
 });
 
 app.post('/get', (req,res, next) => {
-    Book.findOne({ title:req.body.title }).lean()
-        .then((book) => {
-            res.render('details', {result: book} );
+    class.findOne({ title:req.body.title }).lean()
+        .then((class) => {
+            res.render('details', {result: class} );
         })
         .catch(err => next(err));
 });
 
 app.get('/delete', (req,res) => {
-    Book.remove({ title:req.query.title }, (err, result) => {
+    class.remove({ classno:req.query.classno }, (err, result) => {
         if (err) return next(err);
         let deleted = result.result.n !== 0; // n will be 0 if no docs deleted
-        Book.count((err, total) => {
-            res.type('text/html');
-            res.render('delete', {title: req.query.title, deleted: result.result.n !== 0, total: total } );    
+        class.count((err, total) => {
+            res.type('text/data');
+            res.render('delete', {class: req.query.classno, deleted: result.result.n !== 0, total: total } );    
         });
     });
 });
 
 // api's
-app.get('/api/v1/book/:title', (req, res, next) => {
-    let title = req.params.title;
-    console.log(title);
-    Book.findOne({title: title}, (err, result) => {
+app.get('/api/v1/class/:class', (req, res, next) => {
+    let title = req.params.classno;
+    console.log(classno);
+    class.findOne({classno: classno}, (err, result) => {
         if (err || !result) return next(err);
         res.json( result );    
     });
 });
 
-app.get('/api/v1/books', (req,res, next) => {
-    Book.find((err,results) => {
+app.get('/api/v1/class', (req,res, next) => {
+    class.find((err,results) => {
         if (err || !results) return next(err);
         res.json(results);
     });
 });
 
-app.get('/api/v1/delete/:title', (req,res, next) => {
-    Book.remove({"title":req.params.title }, (err, result) => {
+app.get('/api/v1/delete/:classno', (req,res, next) => {
+    class.remove({"title":req.params.classno }, (err, result) => {
         if (err) return next(err);
         // return # of items deleted
         res.json({"deleted": result.result.n});
     });
 });
 
-app.get('/api/v1/add/:title/:author/:pubdate', (req,res, next) => {
+app.get('/api/v1/add/:classno/:omar/:omar', (req,res, next) => {
     // find & update existing item, or add new 
-    let title = req.params.title;
-    Book.update({ title: title}, {title:title, author: req.params.author, pubdate: req.params.pubdate }, {upsert: true }, (err, result) => {
+    let title = req.params.classno;
+    class.update({ classno: classno},  {upsert: true }, (err, result) => {
         if (err) return next(err);
         // nModified = 0 for new item, = 1+ for updated item 
         res.json({updated: result.nModified});
