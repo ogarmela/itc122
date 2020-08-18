@@ -1,46 +1,46 @@
 'use strict'
 
-var Book = require("../models/book");
+var class = require("../models/class");
 
-Book.update({ title: 'dune'}, {title:"dune", author:"frank herberd", amount: 10, pubdate: "05-21-1969"}, {upsert: true }, (err, result) => {
+class.update({ classno: 'omar'}, {class:"omar", Omar:"Omar Garmela", course: 3, year: "08-20-2020"}, {upsert: true }, (err, result) => {
 //  if (err) return handleError(err);
   console.log('The  response from Mongo was ', result);
 });
 
-Book.find({title: "dune"}, (err, book, next) => {
+class.find({classno: "omar"}, (err, class, next) => {
 /*    if (err) return next(err);
-    if (book) {
+    if (class) {
         console.log
-        book.author = author;
-        book.pubdate = pubdate;
+        class.author = omar;
+        class.year = year;
     } else {
-        let book = new Book({title:"dune", author:"frank herbert", amount: 10, pubdate: "05-21-1969"})
+        let class = new class({class:"omar", omar:"omar", course: 0, year: "08-20-2020"})
     }
-    console.log(book)
-    book.save((err) =>{
+    console.log(class)
+    class.save((err) =>{
         if (err) {
         console.log(err);
         } else {
-          console.log("Book saved")
+          console.log("class saved")
         }
     });
 */
 /*    
-    new Book({title:"dune", author:"frank herbert", amount: 10, pubdate: "05-21-1969"})
-  tank.size = 'large';
-  tank.save(function (err, updatedTank) {
+    new class({classno:"omar", omar:"omar Garmela", year: 3, year: "08-20-2020"})
+  big.size = 'large';
+  big.save(function (err, updatedbig) {
     if (err) return handleError(err);
-    res.send(updatedTank);
+    res.send(updatedbig);
   });
 */
 });
 
-Book.countDocuments((err, result) => {
+class.countDocuments((err, result) => {
     console.log(result);
 });
 
 // find all documents 
-Book.find({}, (err, result) => {
+classfind({}, (err, result) => {
     // output error if one occurred
     if (err) {
         console.log(err);
