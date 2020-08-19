@@ -77,7 +77,7 @@ app.get('/api/v1/class', (req,res, next) => {
 });
 
 app.get('/api/v1/delete/:classno', (req,res, next) => {
-    class.remove({"title":req.params.classno }, (err, result) => {
+    class.remove({"classno":req.params.classno }, (err, result) => {
         if (err) return next(err);
         // return # of items deleted
         res.json({"deleted": result.result.n});
