@@ -57,14 +57,14 @@ sequelize
   })
   .catch(console.error);
 
-// create a new movie resource
+// create a new courses resource
 router.post("/class/add", (req, res, next) => {
   console.log("what is req.body", req.body);
-  Movie.create(req.body)
+  class.create(req.body)
     .then(class => res.json(class))
     .catch(next);
 });
-// read all movies
+// read all class
 //Implement pagination on the "read all" collections resource end-point.
 router.get("/class", (req, res, next) => {
   const limit = req.query.limit || 5;
@@ -96,7 +96,7 @@ router.put("/class/:id", (req, res, next) => {
 // delete a single class resource
 router.delete("/class/delete/:id", (req, res, next) => {
   res.send("DELETED"); // -> route works
-  Movie.delete({
+  class.delete({
     where: {
       id: req.params.id
     }
