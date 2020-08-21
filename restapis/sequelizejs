@@ -4,11 +4,11 @@ const bodyParser = require("body-parser");
 const port = process.env.PORT || 4000;
 const app = express();
 const sequelize = new Sequelize(
-  "@mongodb\.com$""
+  "omar.garmela@mongodb\.com$"
 );
 const connectionString =
   process.env.DATABASE_URL ||
-  "@mongodb\.com$"";
+  "omar.garmela@mongodb\.com$"";
 const { Router } = require("express");
 const router = new Router();
 app.use(bodyParser.json());
