@@ -1,22 +1,22 @@
 {
   "name": "rest-apis-homework",
   "version": "1.0.0",
-  "description": "This assignment is made up of two sections. The sections can be completed in _any_ order. If you get stuck on one section, take a break and try another. Complete as many steps from each section as you can.",
+  "description": "This app is my course assignment.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/seabelis/rest-apis-homework.git"
+    "url": "https://github.com/ogarmela/itc122/tree/master/restapis"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/seabelis/rest-apis-homework/issues"
+    "url": "https://https://github.com/ogarmela/itc122/tree/master/restapis"
   },
-  "homepage": "https://github.com/seabelis/rest-apis-homework#readme",
+  "homepage": "https://https://github.com/ogarmela/itc122/tree/master/restapis",
   "dependencies": {
     "body-parser": "^1.19.0",
     "express": "^4.17.1",
