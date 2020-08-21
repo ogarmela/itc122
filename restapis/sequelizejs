@@ -1,0 +1,114 @@
+const express = require("express");
+const Sequelize = require("sequelize");
+const bodyParser = require("body-parser");
+const port = process.env.PORT || 4000;
+const app = express();
+const sequelize = new Sequelize(
+  "@mongodb\.com$""
+);
+const connectionString =
+  process.env.DATABASE_URL ||
+  "@mongodb\.com$"";
+const { Router } = require("express");
+const router = new Router();
+app.use(bodyParser.json());
+app.use(router);
+
+const class = sequelize.define("class", {
+  classno: Sequelize.TEXT,
+  year: Sequelize.INTEGER,
+  synopsis: Sequelize.TEXT
+});
+
+//Make sure the model is synched with the database upon startup.
+// sequelize.sync({force: true }) // ENABLE TO CLEAR ALL DATA
+sequelize
+  .sync()
+  .then(() => console.log("Tables created successfully"))
+  .catch(err => {
+    console.error("Unable to create tables, shutting down...", err);
+    process.exit(1);
+  })
+
+  //Use the model create() method to insert 3 rows of example data.
+  .then(() => {
+    const class = [
+      {
+        classno: "122",
+        year: 2020,
+        synopsis:
+          "THis course was very difficult."
+      },
+      {
+        class: "omar",
+        year: 2020,
+        synopsis:
+          "I get this course for headache. i hope i will finish this course next few weeks"
+      },
+      {
+        class: "classno",
+        year: 2020,
+        synopsis:
+          "I am planning to create new app that make the project"
+      }
+    ];
+    const classPromises = class.map(movie => class.create(class));
+    return Promise.all(classPromises);
+  })
+  .catch(console.error);
+
+// create a new movie resource
+router.post("/class/add", (req, res, next) => {
+  console.log("what is req.body", req.body);
+  Movie.create(req.body)
+    .then(class => res.json(class))
+    .catch(next);
+});
+// read all movies
+//Implement pagination on the "read all" collections resource end-point.
+router.get("/class", (req, res, next) => {
+  const limit = req.query.limit || 5;
+  const offset = req.query.offset || 0;
+  class.findAndCountAll({ limit, offset })
+    .then(result => res.send({ class: result.rows, total: result.count }))
+    .catch(error => next(error));
+});
+// read a single courses
+router.get("/class/:id", (req, res, next) => {
+  class.findByPk(req.params.id)
+    .then(params => {
+      res.send(params);
+    })
+    .catch(next);
+});
+// update a single course resource
+router.put("/class/:id", (req, res, next) => {
+  class.findByPk(req.params.id)
+    .then(class => {
+      if (class) {
+        class.update(req.body).then(class => res.json(class));
+      } else {
+        res.status(404).end();
+      }
+    })
+    .catch(next);
+});
+// delete a single class resource
+router.delete("/class/delete/:id", (req, res, next) => {
+  res.send("DELETED"); // -> route works
+  Movie.delete({
+    where: {
+      id: req.params.id
+    }
+  })
+    .then(numDeleted => {
+      if (numDeleted) {
+        res.status(204).end();
+      } else {
+        res.status(404).end();
+      }
+    })
+    .catch(next);
+});
+
+app.listen(port, () => console.log(`Example app class on port ${port}!`));
