@@ -27,7 +27,6 @@ exports.delete = (title) => {
     return {deleted: oldSize !== movies_array.length, total: movies_array.length };
 }
 
-
 exports.add = (new_movies_object) => {
     const oldLength = movies_array.length;
     // use existing get() method to check if book already in our list
