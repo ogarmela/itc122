@@ -56,7 +56,7 @@ http.createServer(function(req,res){
       
     //    got getAll
     
-    case '/getall':                 // be lazy and keep lowercase 
+    case '/getall':                 
       res.writeHead(200, {'Content-Type': 'text/plain'});
 
       let found4 = movies.getAll();         // gets ALL titles
