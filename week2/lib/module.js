@@ -6,7 +6,7 @@ var movies_array = [
     {title:"Madino",director:" Haji Ali",releasedate:"1997"}
 ];
 
-// THIS prints out ALL contents of this database
+// prints out the contents of this database
 exports.getAll = () => {
     return movies_array;
 }
@@ -37,6 +37,5 @@ exports.add = (new_movies_object) => {
     // if old & new array lengths differ, item was added
     return {added: oldLength !== movies_array.length, total: movies_array.length };
 };
-
 
 console.log(movies_array + "\n \n");
