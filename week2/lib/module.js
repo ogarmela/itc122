@@ -38,4 +38,5 @@ exports.add = (new_movies_object) => {
     return {added: oldLength !== movies_array.length, total: movies_array.length };
 };
 
+
 console.log(movies_array + "\n \n");
