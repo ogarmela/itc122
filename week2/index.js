@@ -30,8 +30,6 @@ http.createServer(function(req,res){
   
   let path = url[0].toLowerCase();
 
-  
-
   switch(path) {
     
     case '/': 
@@ -63,12 +61,10 @@ http.createServer(function(req,res){
       
       let results4 = (found4) ? JSON.stringify(found4) : "Not found";
       
-
       res.write(results4 + "\n");
       res.end("\n");
       break;
       
-
 
     case '/delete':
       res.writeHead(200, {'Content-Type': 'text/plain'});
