@@ -25,7 +25,7 @@ app.get('/about', function(req,res){
     res.send('About page');
 });
 
-// handle GET 
+// handle get
 app.get('/delete', function(req,res){
     let result = movies.delete(req.query.title); // delete movies object
     res.render('delete', {title: req.query.title, result: result});
