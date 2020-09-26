@@ -1,12 +1,12 @@
 var movies_array = [
-    {title:"Muno",director:"Abd Ahmed",releasedate:"2018"},
+    {title:"Muno",director:"Abdi Ahmed",releasedate:"2018"},
     {title:"Maryam",director:"Cubtan Elmi",releasedate:"2019"},
     {title:"Ramlo",director:"Jalwo Ali",releasedate:"2000"},
     {title:"Aasho",director:"Abdirizak Ladane",releasedate:"2009"},
     {title:"Saedo",director:"Madino Omar",releasedate:"1985"}
 ];
 
-// THIS prints out ALL contents of this database
+// This prints out all contents of this database
 exports.getAll = () => {
     return movies_array;
 }
@@ -16,7 +16,6 @@ exports.get = (title) => {
     return item.title === title;
     });
 };
-
 
 exports.delete = (title) => {
     // retain array length for later comparison after array modification
