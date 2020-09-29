@@ -1,62 +1,35 @@
-'use strict';
+'use strict'
+const expect = require("chai").expect;
+const book = require("../lib/book");
 
-var http = require("http"), fs = require('fs'), queryString = require("querystring");
-var express = require('express');
-var app = express();
-var handlebars = require('express-handlebars')
-   .create({ defaultLayout: 'main' });  // handlebars view engine
-app.engine('.html', handlebars.engine);
-app.set('view engine', 'handlebars');
+describe("Book", function() {
+    
+    it("returns requested book", function() {
+        let result = book.get("Salmo");
+        expect(result).to.deep.equal({title: "Salmo", author:"Muno Mursal", pubdate:2018});
+    });
+    
+    it("fails to return an w/ invalid book", function() {
+        let result = book.get("fake");
+        expect(result).to.be.undefined;
+    });
 
-// bring in the public art JSON file
-let publicArt = require("./lib/seattle-public-art-methods.js");
+    it("adds a new book", function() {
+        let result = book.add({title: "Salmo Jibriil", author:"Mursa Mursal", pubdate:2018});
+        expect(result.added).to.be.true;
+    });
+    it("fails to add an existing book", function() {
+        let result = book.add({title: "Salmo", author:"Mursal Mursal", pubdate:2018});
+        expect(result.added).to.be.false;
+    });
 
-app.set('port', process.env.PORT || 3000);
+    it("deletes an existing book", function() {
+        let result = book.delete("Salmo");
+        expect(result.deleted).to.be.true;
+    });
+    it("fails to delete an invalid book", function() {
+        let result = book.delete("She is very religious");
+        expect(result.deleted).to.be.false;
+    });
 
-app.use(express.static(__dirname + '/public'));
-
-app.use(require('body-parser').urlencoded({ extended: true }));
-
-app.get('/home', function(req, res) {
-  res.render('home');
 });
-
-app.post('/get-art-title', function(req,res){
-  console.log('Got POST request.');
-  let searchTitle = req.body.artTitle; // could be array of requested titles to get
-  let foundArt = publicArt.get(searchTitle); // get public art objects into array
-  res.render('report', { Title: searchTitle, foundArt});
-});
-
-app.post('/delete-art-title', function(req,res){
-  console.log('Got POST request.');
-  console.log(req.body.deleteArtTitle);
-  let deleteArtTitle = req.body.deleteArtTitle;  // title of art to delete
-  let deleteArtResult = publicArt.delete(deleteArtTitle);
-  res.render('deleted', { Title: deleteArtTitle, deleteArtResult});
-});
-
-app.get('/about', function(req, res) {
-  res.render('about');
-});
-
-// custom 404 page
-app.use(function(req, res) {
-  res.type('text/plain');
-  res.status(404);
-   console.log('Got 404 - Not Found request.');
-  res.send('404 - Not Found');
-});
-
-// custom 500 page
-app.use(function(err, req, res, next) {
-  console.error(err.stack);
-  res.type('text/plain');
-  res.status(500);
-  res.send('500 - Server Error');
-});
-
-app.listen(app.get('port'), function () {
-  console.log('Express started on http://localhost:3000' + app.get('port') + '; press Ctrl-c to terminate.');  // show console you are running
-});
-
