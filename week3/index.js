@@ -1,81 +1,62 @@
-let movies = require("./lib/book_module.js");
+'use strict';
 
-var bookMethods = require("./lib/book_module");
+var http = require("http"), fs = require('fs'), queryString = require("querystring");
+var express = require('express');
+var app = express();
+var handlebars = require('express-handlebars')
+   .create({ defaultLayout: 'main' });  // handlebars view engine
+app.engine('.html', handlebars.engine);
+app.set('view engine', 'handlebars');
 
-var Book = require("./models/book"); // use database model
-
-
-
-const express = require("express");
-const app = express();
+// bring in the public art JSON file
+let publicArt = require("./lib/seattle-public-art-methods.js");
 
 app.set('port', process.env.PORT || 3000);
-app.use(express.static(__dirname + '/public')); // allows direct navigation to static files
-app.use(require("body-parser").urlencoded({extended: true}));
 
-let handlebars =  require("express-handlebars");
-app.engine(".html", handlebars({extname: '.html'}));
-app.set("view engine", ".html");
+app.use(express.static(__dirname + '/public'));
 
+app.use(require('body-parser').urlencoded({ extended: true }));
 
-// get all default to web page ALL
-app.get('/', (req, res, next) => {
-  bookMethods.getAll().then((items) => {
-    res.render('home', {books: items }); 
-  }).catch((err) =>{
-    return next(err);
-  });
+app.get('/home', function(req, res) {
+  res.render('home');
 });
 
-
-// show details 
-app.get('/details', (req,res,next) => {
-    Book.findOne({ title:req.query.title }, (err, book) => {
-        if (err) return next(err);
-        res.type('text/html');
-        res.render('details', {result: book} ); 
-    });
+app.post('/get-art-title', function(req,res){
+  console.log('Got POST request.');
+  let searchTitle = req.body.artTitle; // could be array of requested titles to get
+  let foundArt = publicArt.get(searchTitle); // get public art objects into array
+  res.render('report', { Title: searchTitle, foundArt});
 });
 
-// Showing details F
-app.post('/details', (req,res, next) => {
-    Book.findOne({ title:req.body.title }, (err, book) => {
-        if (err) return next(err);
-        res.type('text/html');
-        res.render('details', {result: book} ); 
-    });
+app.post('/delete-art-title', function(req,res){
+  console.log('Got POST request.');
+  console.log(req.body.deleteArtTitle);
+  let deleteArtTitle = req.body.deleteArtTitle;  // title of art to delete
+  let deleteArtResult = publicArt.delete(deleteArtTitle);
+  res.render('deleted', { Title: deleteArtTitle, deleteArtResult});
 });
 
-
-// deleting
-app.get('/delete', (req,res, next) => { 
-    Book.remove({ title:req.query.title }, (err, result) => { 
-        if (err) return next(err);
-        let deleted = result.n !== 0; // n will be 0 if no docs deleted
-        Book.count({},  (err, total) => {                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      ) => {
-             res.type('text/html');
-             res.render('delete', {title: req.query.title, deleted:deleted , total:total } );    
-        });  
-    });  
-});  
-
-
-// send plain text response
-// for the ABOUT PAGE
-app.get('/about', function(req,res){
-    res.type('text/plain');
-    res.send('About page');
+app.get('/about', function(req, res) {
+  res.render('about');
 });
 
-
-// define 404 handler
-app.use(function(req,res) {
-    res.type('text/plain'); 
-    res.status(404);
-    res.send('404 - Not found');
+// custom 404 page
+app.use(function(req, res) {
+  res.type('text/plain');
+  res.status(404);
+   console.log('Got 404 - Not Found request.');
+  res.send('404 - Not Found');
 });
 
-
-app.listen(app.get('port'), function() {
-    console.log('Express started');    
+// custom 500 page
+app.use(function(err, req, res, next) {
+  console.error(err.stack);
+  res.type('text/plain');
+  res.status(500);
+  res.send('500 - Server Error');
 });
+
+app.listen(app.get('port'), function () {
+  console.log('Express started on http://localhost:3000' + app.get('port') + '; press Ctrl-c to terminate.');  // show console you are running
+});
+
