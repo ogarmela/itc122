@@ -7,7 +7,6 @@ var bookMethods = require("./lib/book_module");
 var Book = require("./models/book"); // database
 
 
-
 const express = require("express");
 const app = express();
 
@@ -49,7 +48,7 @@ app.post('/details', (req,res, next) => {
 });
 
 
-// FOR DELETING
+// for deleting
 app.get('/delete', (req,res, next) => { 
     Book.remove({ title:req.query.title }, (err, result) => { 
         if (err) return next(err);
