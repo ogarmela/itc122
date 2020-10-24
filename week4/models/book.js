@@ -12,7 +12,6 @@ var conn = mongoose.connection;
 conn.on('error', console.error.bind(console, 'connection error:'));
 
 // define Book model in JSON key/value pairs
-// values indicate the data type of each key
 var mySchema = mongoose.Schema({
  title: { type: String, required: true },
  director: String,
