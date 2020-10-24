@@ -1,14 +1,14 @@
 var Book = require("../model/book.js");
 
-// this prints all contents of database
+// print database
 exports.getAll = () => {
   return Book.find({}, (err, result) => {
     if (err) {
       return err;
     }
-    // line below will print out number of items in database
+    // print out database
     console.log(result.length);
-    // LINE BELOW will render result to web-client-page
+    // render result to web-client-page
     return result;
   });
 };
