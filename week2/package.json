@@ -1,20 +1,33 @@
 {
-  "name": "IT122",
+  "name": "it122",
   "version": "1.0.0",
-  "description": "web-server APP",
+  "description": "node.js repo.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: Test unspecified"
   },
-  "keywords": [
-    "Omar",
-    "Garmela",
-    "it122",
-    "summer",
-    "2020",
-    "web-server",
-    "APP"
-  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ogarmela/itc122"
+  },
   "author": "Omar Garmela",
-  "license": "ISC"
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ogarmela/IT122-Javascript-2/issues"
+  },
+  "homepage": "https://github.com/ogarmela/itc122#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "express-handlebars": "^5.0.0",
+    "mongoose": "^5.9.25",
+    "serialize-javascript": "^3.1.0"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "eslint": "^7.4.0",
+    "mocha": "^8.1.1",
+    "nodemon": "^2.0.4"
+  }
 }
