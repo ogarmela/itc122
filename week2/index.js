@@ -1,6 +1,6 @@
 'use strict'
 
-let movies = require("./lib/module.js");
+let movies = require("../lib/module.js");
 
 const express = require("express");
 const app = express();
