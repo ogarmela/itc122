@@ -4,7 +4,7 @@ let movies = require("./lib/book_module.js");
 
 var bookMethods = require("./lib/book_module");
 
-var Book = require("./models/book"); // use database model
+var Book = require("./models/book"); // use database 
 
 
 
@@ -12,11 +12,11 @@ const express = require("express");
 const app = express();
 
 app.set('port', process.env.PORT || 3000);
-app.use(express.static(__dirname + '/public')); // allows direct navigation to static files
+app.use(express.static(__dirname + '/public')); 
 app.use(require("body-parser").json());
 app.use(require("body-parser").urlencoded({extended: true}));
 //app.use('/api',require('cors')());
-//app.use('/api',require('cors')()); // set Access-Control-Allow-Origin header for api route
+//app.use('/api',require('cors')()); 
 
 let handlebars =  require("express-handlebars");
 app.engine(".html", handlebars({extname: '.html'}));
@@ -109,16 +109,16 @@ app.post('/details', (req,res, next) => {
 
 
 // FOR DELETING
-app.get('/delete', (req,res, next) => { // FLAG A
+app.get('/delete', (req,res, next) => { 
     Book.remove({ title:req.query.title }, (err, result) => { // FLAG B
         if (err) return next(err);
         let deleted = result.n !== 0; // n will be 0 if no docs deleted
-        Book.count({},  (err, total) => {  // FLAG C                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ) => {
+        Book.count({},  (err, total) => {                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    ) => {
              res.type('text/html');
              res.render('delete', {title: req.query.title, deleted:deleted , total:total } );    
-        });  // FLAG C
-    });  // FLAG B
-});  // FLAG A
+        });  
+    });  
+});  
 
 
 // send plain text response
