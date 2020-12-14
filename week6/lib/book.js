@@ -1,4 +1,4 @@
-var Book = require("../models/book.js");
+var Book = require("./models/book.js");
 
 // This prints out aLL contents of this database
 exports.getAll = () => {
