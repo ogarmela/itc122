@@ -2,7 +2,7 @@
 
 let express = require("express");
 let bodyParser = require("body-parser");
-let Book = require("./models/book"); // use database model
+let Book = require("./models/book"); 
 
 let app = express();
 
